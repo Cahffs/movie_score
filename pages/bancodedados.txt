@@ -1,0 +1,62 @@
+CREATE DATABASE movie_score;
+
+USE movie_score;
+
+CREATE TABLE usuario (
+    cod INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    login VARCHAR(50) UNIQUE NOT NULL,
+    senha VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE filme (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    imagem_url VARCHAR(200) NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    diretor VARCHAR(100) NOT NULL,
+    ano VARCHAR(4) NOT NULL,
+    genero VARCHAR(30) NOT NULL,
+    nota TINYINT NOT NULL,
+    avaliacao TEXT NOT NULL,
+    usuario_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(cod)
+);
+
+INSERT INTO usuario (nome, login, senha) 
+VALUES ('Caio Assaoka', 'caio', 'caio');
+
+INSERT INTO filme (imagem_url, titulo, diretor, ano, genero, nota, avaliacao, usuario_id) 
+VALUES 
+('https://m.media-amazon.com/images/S/pv-target-images/ae8dddd0abc2fac14052f29bc2ae15ddd86374c0d3bd017171ee6473b8933b29.jpg', 
+'Batman: O Cavaleiro das Trevas', 
+'Cristopher Nolan', 
+'2008', 
+'Ação', 
+5, 
+'APLAUDO de pé essa obra extraordinária. Christopher Nolan surpreende com suas ideias e criatividade de cinema desde essa época, assim como a participação de David Goyer no roteiro.',
+(SELECT cod FROM usuario WHERE login = 'caio'));
+
+INSERT INTO filme (imagem_url, titulo, diretor, ano, genero, nota, avaliacao, usuario_id) 
+VALUES 
+('https://cdn.culturagenial.com/imagens/amnesia-cartaz-cke.jpg?class=article', 
+'Amnésia', 
+'Cristopher Nolan', 
+'2000', 
+'Drama', 
+5, 
+'Antes do crime, o protagonista trabalhava como investigador de uma companhia de seguros. Foi ai que conheceu Sammy, um homem que sofreu um acidente e perdeu a capacidade de reter novas memórias. Na época, o seu veredito foi de que o caso era falso. Para testar o marido, a esposa de Jankis pediu que ele lhe administrasse grandes doses de insulina e morreu na sequência. O caso tão semelhante ao seu e a culpa que a sua decisão gerou acompanham o protagonista ao longo do todo o filme. As duas sequências temporais do longa-metragem (a cores e a preto e branco) se encontram no momento em que Leonard descobre quem está do outro lado do telefone. É aí que inicia a sua perseguição, influenciado pelas personagens que vai conhecendo.',
+(SELECT cod FROM usuario WHERE login = 'caio'));
+
+INSERT INTO usuario (nome, login, senha) 
+VALUES ('Osvaldo Cesar', 'cesar', 'cesar');
+
+INSERT INTO filme (imagem_url, titulo, diretor, ano, genero, nota, avaliacao, usuario_id) 
+VALUES 
+('https://m.media-amazon.com/images/S/pv-target-images/bfb748fae78a73d31aeb4d05b3ca9fa5d03dd0f8347c4206125dcd5308087b7b.jpg', 
+'Os Infiltrados', 
+'Martin Scorsese', 
+'2006', 
+'Terror', 
+4, 
+'Em Os Infiltrados, a polícia trava uma verdadeira guerra contra o crime organizado em Boston. Billy Costigan (Leonardo DiCaprio), um jovem policial, recebe a missão de se infiltrar na máfia, mais especificamente no grupo comandado por Frank Costello (Jack Nicholson). Aos poucos Billy conquista sua confiança, ao mesmo tempo em que Colin Sullivan (Matt Damon), um criminoso que foi infiltrado na polícia como informante de Costello, também ascende dentro da corporação. Tanto Billy quanto Colin sentem-se aflitos devido à vida dupla que levam, tendo a obrigação de sempre obter informações. Porém quando a máfia e a polícia descobrem que entre eles há um espião, a vida de ambos passa a correr perigo.',
+(SELECT cod FROM usuario WHERE login = 'cesar'));
